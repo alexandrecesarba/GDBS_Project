@@ -16,22 +16,25 @@ class Coordinator: NSObject, MKMapViewDelegate {
     }
 
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        print("Chamado rendererFor overlay") // Adicione este log
+
         if let polygon = overlay as? MKPolygon {
             let renderer = MKPolygonRenderer(polygon: polygon)
 
-            // Verifica se o título do polígono é válido
-            if let regionName = polygon.title?.lowercased(), // Normaliza para minúsculas
+            if let regionName = polygon.title?.lowercased(),
                let region = regionData[regionName] {
+                print("Região encontrada: \(regionName), Score: \(region.score)")
                 renderer.fillColor = ColorUtils.calculateColor(for: region.score, minValue: 0.0, maxValue: 100.0)
             } else {
-                renderer.fillColor = UIColor.gray // Cor padrão para regiões não encontradas
+                print("Região não encontrada: \(polygon.title ?? "Unknown")")
+                renderer.fillColor = UIColor.gray
             }
-
 
             renderer.strokeColor = UIColor.black
             renderer.lineWidth = 1
             return renderer
         }
+
         return MKOverlayRenderer()
     }
 }

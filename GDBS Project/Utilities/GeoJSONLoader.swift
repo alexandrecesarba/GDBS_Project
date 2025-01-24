@@ -1,61 +1,65 @@
-//
-//  GeoJSONLoader.swift
-//  GDBS Project
-//
-//  Created by Alexandre César Brandão de Andrade on 24/01/25.
-//
-
-
 import MapKit
 
-
-struct GeoJSONLoader {
-    public func loadGeoJSON(into mapView: MKMapView, with regionData: [String: Region]) {
+public class GeoJSONLoader {
+    func loadGeoJSON(into mapView: MKMapView, with regionData: [String: Region]) {
         guard let geoJSONURL = Bundle.main.url(forResource: "GoodCoordinates", withExtension: "geojson") else {
-            print("GeoJSON não encontrado")
+            print("Arquivo GeoJSON não encontrado no bundle.")
             return
         }
+        print("Caminho do GeoJSON: \(geoJSONURL)")
 
         do {
             let data = try Data(contentsOf: geoJSONURL)
+            print("GeoJSON carregado com sucesso, tamanho: \(data.count) bytes")
+
             let decoder = MKGeoJSONDecoder()
+            print("Decodificando GeoJSON...")
             let geoJSONObjects = try decoder.decode(data)
+            print("GeoJSON decodificado com sucesso, total de objetos: \(geoJSONObjects.count)")
 
             for object in geoJSONObjects {
-                if let feature = object as? MKGeoJSONFeature,
-                   let geometry = feature.geometry.first as? MKPolygon {
-                    if let propertiesData = feature.properties,
-                       let propertiesString = String(data: propertiesData, encoding: .utf8),
-                       let jsonData = propertiesString.data(using: .utf8),
-                       let properties = try? JSONSerialization.jsonObject(with: jsonData) as? [String: Any],
-                       let regionName = properties["NOMCOMAR"] as? String {
-                        geometry.title = regionName.lowercased() // Associa o nome da região
-                        print(regionName)
+                print("Tipo do objeto decodificado: \(type(of: object))")
+
+                if let feature = object as? MKGeoJSONFeature {
+                    print("Feature válida encontrada com propriedades: \(String(describing: feature.properties))")
+
+                    if let geometry = feature.geometry.first {
+                        print("Geometria encontrada: \(type(of: geometry))")
+
+                        if let polygon = geometry as? MKPolygon {
+                            // Configura o título do polígono
+                            configurePolygon(polygon, with: feature, on: mapView)
+                        } else if let multiPolygon = geometry as? MKMultiPolygon {
+                            print("MultiPolygon encontrado. Convertendo em polígonos.")
+                            for polygon in multiPolygon.polygons {
+                                configurePolygon(polygon, with: feature, on: mapView)
+                            }
+                        } else {
+                            print("Geometria não é compatível: \(geometry)")
+                        }
+                    } else {
+                        print("Nenhuma geometria encontrada para o feature.")
                     }
-                    mapView.addOverlay(geometry)
+                } else {
+                    print("Objeto GeoJSON inesperado: \(object)")
                 }
             }
         } catch {
-            print("Erro ao carregar GeoJSON: \(error)")
+            print("Erro ao carregar ou decodificar o GeoJSON: \(error)")
         }
     }
 
-
-
-    static func getRegionColor(for feature: MKGeoJSONFeature, using data: [String: Region]) -> UIColor {
-        guard let propertiesData = feature.properties,
-              let properties = try? JSONSerialization.jsonObject(with: propertiesData) as? [String: Any],
-              let regionName = properties["NOMCOMAR"] as? String else {
-            print("Tudo cinza")
-            return .gray
+    private func configurePolygon(_ polygon: MKPolygon, with feature: MKGeoJSONFeature, on mapView: MKMapView) {
+        if let propertiesData = feature.properties,
+           let propertiesString = String(data: propertiesData, encoding: .utf8),
+           let jsonData = propertiesString.data(using: .utf8),
+           let properties = try? JSONSerialization.jsonObject(with: jsonData) as? [String: Any],
+           let regionName = properties["NOMCOMAR"] as? String {
+            polygon.title = regionName.lowercased()
+            print("Polígono carregado para a região: \(regionName.lowercased())")
+            mapView.addOverlay(polygon)
+        } else {
+            print("Falha ao processar propriedades do GeoJSON.")
         }
-        print("Polígono carregado para a região: \(regionName)")
-
-
-        if let region = data[regionName] {
-            return ColorUtils.calculateColor(for: region.score, minValue: 0.0, maxValue: 100.0)
-        }
-
-        return .gray
     }
 }
