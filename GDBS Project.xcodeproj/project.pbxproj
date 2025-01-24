@@ -29,22 +29,9 @@
 		97AFCC2A2D350C0200C2DD9A /* GDBS ProjectUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "GDBS ProjectUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		970CA8812D4008FC00B39228 /* Exceptions for "GDBS Project" folder in "GDBS Project" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				"GDBS-Project-Info.plist",
-			);
-			target = 97AFCC0F2D350C0000C2DD9A /* GDBS Project */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		97AFCC122D350C0000C2DD9A /* GDBS Project */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				970CA8812D4008FC00B39228 /* Exceptions for "GDBS Project" folder in "GDBS Project" target */,
-			);
 			path = "GDBS Project";
 			sourceTree = "<group>";
 		};
