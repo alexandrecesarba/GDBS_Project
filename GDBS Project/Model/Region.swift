@@ -15,7 +15,7 @@ struct Region {
     let income: Double
     // Punctuation Formula
     var score: Double {
-        let idqaValue = idqa ?? 0.0 // if ni l== 0
+        let idqaValue = idqa ?? 0.0 // if nil== 0
         return (idqaValue * 0.4) + (income * 0.3) - (crimes * 0.3)
     }
 }

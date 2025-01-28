@@ -2,63 +2,130 @@ import SwiftUI
 import MapKit
 
 struct MapView: UIViewRepresentable {
-    let regionData: [String: Region] = [
-        "alt camp": Region(name: "alt camp", idqa: 19.0, crimes: 15378.0, population: 147983.0, income: 34636.0),
-        "alt emporda": Region(name: "alt emporda", idqa: 72.0, crimes: 109281.0, population: 180546.0, income: 28003.0),
-        "alt penedes": Region(name: "alt penedes", idqa: 22.0, crimes: 52140.0, population: 108016.0, income: 32300.0),
-        "alt urgell": Region(name: "alt urgell", idqa: nil, crimes: 4744.0, population: 88989.0, income: 25352.0),
-        "alta ribagorca": Region(name: "alta ribagorca", idqa: nil, crimes: 2055.0, population: 23352.0, income: 28375.0),
-        "anoia": Region(name: "anoia", idqa: 20.0, crimes: 41359.0, population: 162741.0, income: 24834.0),
-        "bages": Region(name: "bages", idqa: 20.0, crimes: 62803.0, population: 143940.0, income: 29804.0),
-        "baix camp": Region(name: "baix camp", idqa: 12.0, crimes: 123380.0, population: 209111.0, income: 26906.0),
-        "baix ebre": Region(name: "baix ebre", idqa: 5.0, crimes: 36111.0, population: 116979.0, income: 25375.0),
-        "baix emporda": Region(name: "baix emporda", idqa: 47.0, crimes: 83707.0, population: 185624.0, income: 24544.0),
-        "baix llobregat": Region(name: "baix llobregat", idqa: 24.0, crimes: 422732.0, population: 189323.0, income: 36667.0),
-        "baix penedes": Region(name: "baix penedes", idqa: nil, crimes: 70535.0, population: 223674.0, income: 18515.0),
-        "barcelones": Region(name: "barcelones", idqa: 29.0, crimes: 2251761.0, population: 266597.0, income: 42134.0),
-        "bergueda": Region(name: "bergueda", idqa: 16.0, crimes: 8823.0, population: 207424.0, income: 28254.0),
-        "cerdanya": Region(name: "cerdanya", idqa: 24.0, crimes: 5779.0, population: 106956.0, income: 24906.0),
-        "conca de barbera": Region(name: "conca de barbera", idqa: 22.0, crimes: 15378.0, population: 126523.0, income: 33713.0),
-        "garraf": Region(name: "garraf", idqa: 15.0, crimes: 104678.0, population: 171945.0, income: 21090.0),
-        "garrigues": Region(name: "garrigues", idqa: 30.0, crimes: 66650.0, population: 121194.0, income: 24577.0),
-        "garrotxa": Region(name: "garrotxa", idqa: 31.0, crimes: 20087.0, population: 148090.0, income: 32710.0),
-        "girones": Region(name: "girones", idqa: 20.0, crimes: 65051.0, population: 241783.0, income: 35777.0),
-        "maresme": Region(name: "maresme", idqa: 23.0, crimes: 258771.0, population: 179740.0, income: 23012.0),
-        "montsia": Region(name: "montsia", idqa: 33.0, crimes: 29170.0, population: 216746.0, income: 21618.0),
-        "noguera": Region(name: "noguera", idqa: 52.0, crimes: 10816.0, population: 156337.0, income: 26901.0),
-        "osona": Region(name: "osona", idqa: 26.0, crimes: 52044.0, population: 148542.0, income: 32350.0),
-        "pallars jussa": Region(name: "pallars jussa", idqa: 16.0, crimes: 4594.0, population: 81636.0, income: 24671.0),
-        "pallars sobira": Region(name: "pallars sobira", idqa: 43.0, crimes: 2297.0, population: 39285.0, income: 27360.0),
-        "pla d'urgell": Region(name: "pla d'urgell", idqa: 30.0, crimes: 66650.0, population: 492153.0, income: 34198.0),
-        "pla de l'estany": Region(name: "pla de l'estany", idqa: 18.0, crimes: 65051.0, population: 418884.0, income: 31355.0),
-        "priorat": Region(name: "priorat", idqa: 70.0, crimes: 61690.0, population: 58632.0, income: 20457.0),
-        "ribera d'ebre": Region(name: "ribera d'ebre", idqa: 14.0, crimes: 4312.0, population: 94997.0, income: 61419.0),
-        "ripolles": Region(name: "ripolles", idqa: 77.0, crimes: 5569.0, population: 62476.0, income: 25680.0),
-        "segarra": Region(name: "segarra", idqa: 18.0, crimes: 16512.0, population: 126949.0, income: 39620.0),
-        "selva": Region(name: "selva", idqa: 20.0, crimes: 116396.0, population: 204178.0, income: 29046.0),
-        "solsones": Region(name: "solsones", idqa: 19.0, crimes: 3447.0, population: 84062.0, income: 27497.0),
-        "tarragones": Region(name: "tarragones", idqa: 13.0, crimes: 200854.0, population: 208813.0, income: 36839.0),
-        "terra alta": Region(name: "terra alta", idqa: 60.0, crimes: 4312.0, population: 147184.0, income: 30131.0),
-        "urgell": Region(name: "urgell", idqa: 33.0, crimes: 8502.0, population: 125040.0, income: 30819.0),
-        "vall d'aran": Region(name: "vall d'aran", idqa: 19.0, crimes: 2055.0, population: 121090.0, income: 38042.0),
-        "valles occidental": Region(name: "valles occidental", idqa: 31.0, crimes: 433887.0, population: 197384.0, income: 34019.0),
-        "valles oriental": Region(name: "valles oriental", idqa: 29.0, crimes: 194840.0, population: 195986.0, income: 34544.0)
-    ]
-
+    @Binding var selectedIndicator: IndicatorType
+    @State private var locations: [(geom: String, codicomar: String, nomcomar: String, capcomar: String, areac5000: Double, DB_IDQA: Int, DB_NombreD: String, DB_Persone: Int, DB_RendaPe: Double)] = []
 
     func makeUIView(context: Context) -> MKMapView {
         let mapView = MKMapView()
         mapView.delegate = context.coordinator
 
-        // Carrega o GeoJSON no mapa
-        GeoJSONLoader().loadGeoJSON(into: mapView, with: regionData)
+        DispatchQueue.global(qos: .userInitiated).async {
+            let fetchedLocations = DatabaseManager.shared.fetchData()
+
+            DispatchQueue.main.async {
+                self.locations = fetchedLocations
+                updateMap(mapView: mapView)
+            }
+        }
 
         return mapView
     }
 
-    func updateUIView(_ uiView: MKMapView, context: Context) {}
+    func updateUIView(_ uiView: MKMapView, context: Context) {
+        updateMap(mapView: uiView)
+    }
 
     func makeCoordinator() -> Coordinator {
-        Coordinator(regionData: regionData)
+        Coordinator()
+    }
+
+    private func updateMap(mapView: MKMapView) {
+        mapView.removeOverlays(mapView.overlays)
+
+        let values = locations.map { selectedIndicator.normalizedValue(for: $0) }
+        let minValue = values.min() ?? 0
+        let maxValue = values.max() ?? 1
+
+        for location in self.locations {
+            do {
+                if let geoJSONData = location.geom.data(using: .utf8) {
+                    let geoJSON = try JSONSerialization.jsonObject(with: geoJSONData, options: []) as? [String: Any]
+
+                    if let featureType = geoJSON?["type"] as? String, featureType == "MultiPolygon",
+                       let multiPolygonCoordinates = geoJSON?["coordinates"] as? [[[[Double]]]] {
+                        for polygonCoordinates in multiPolygonCoordinates {
+                            for ringCoordinates in polygonCoordinates {
+                                var coordinatesArray: [CLLocationCoordinate2D] = []
+
+                                for coordinate in ringCoordinates {
+                                    if coordinate.count == 2 {
+                                        let longitude = coordinate[0]
+                                        let latitude = coordinate[1]
+                                        coordinatesArray.append(CLLocationCoordinate2D(latitude: latitude, longitude: longitude))
+                                    }
+                                }
+
+
+                                let value = selectedIndicator.normalizedValue(for: location)
+                                let normalizedValue = CGFloat(value - minValue) / CGFloat(maxValue - minValue)
+                                let color = UIColor(
+                                    red: normalizedValue,
+                                    green: 0.0,
+                                    blue: 1.0 - normalizedValue,
+                                    alpha: 0.6
+                                )
+
+                                let polygon = ColoredPolygon(coordinates: coordinatesArray, count: coordinatesArray.count)
+                                polygon.fillColor = color
+                                mapView.addOverlay(polygon)
+                            }
+                        }
+                    }
+                }
+            } catch {
+                print("Failed to parse GeoJSON for location: \(location.codicomar). Error: \(error)")
+            }
+        }
+    }
+
+    class Coordinator: NSObject, MKMapViewDelegate {
+        override init() {
+            super.init()
+        }
+
+        func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+            if let polygon = overlay as? ColoredPolygon {
+                let renderer = MKPolygonRenderer(polygon: polygon)
+                renderer.fillColor = polygon.fillColor
+                renderer.strokeColor = .black
+                renderer.lineWidth = 1
+                return renderer
+            }
+            return MKOverlayRenderer(overlay: overlay)
+        }
     }
 }
+
+class ColoredPolygon: MKPolygon {
+    var fillColor: UIColor?
+}
+
+enum IndicatorType: String, CaseIterable, Identifiable {
+    case idqa = "IDQA"
+    case crimes = "Crimes"
+    case income = "Income per capita"
+
+    var id: String { rawValue }
+
+    func value(for location: (geom: String, codicomar: String, nomcomar: String, capcomar: String, areac5000: Double, DB_IDQA: Int, DB_NombreD: String, DB_Persone: Int, DB_RendaPe: Double)) -> Double {
+        switch self {
+        case .idqa:
+            return Double(location.DB_IDQA)
+        case .crimes:
+            return Double(location.DB_NombreD) ?? 0.0
+        case .income:
+            return location.DB_RendaPe
+        }
+    }
+
+    func normalizedValue(for location: (geom: String, codicomar: String, nomcomar: String, capcomar: String, areac5000: Double, DB_IDQA: Int, DB_NombreD: String, DB_Persone: Int, DB_RendaPe: Double)) -> Double {
+        let value = value(for: location)
+
+        if self == .crimes {
+            return log(max(value, 1.0))
+        }
+
+        return value
+    }
+}
+

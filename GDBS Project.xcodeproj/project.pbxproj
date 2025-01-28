@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		970C80482D4845E600B1B7B1 /* PostgresClientKit in Frameworks */ = {isa = PBXBuildFile; productRef = 970C80472D4845E600B1B7B1 /* PostgresClientKit */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		97AFCC212D350C0200C2DD9A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -24,9 +28,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		97AFCC102D350C0000C2DD9A /* GDBS Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GDBS Project.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		97AFCC202D350C0200C2DD9A /* GDBS ProjectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "GDBS ProjectTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		97AFCC2A2D350C0200C2DD9A /* GDBS ProjectUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "GDBS ProjectUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		970C80222D4845B800B1B7B1 /* GDBS Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GDBS Project.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		970C80232D4845B800B1B7B1 /* GDBS ProjectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "GDBS ProjectTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		970C80242D4845B800B1B7B1 /* GDBS ProjectUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "GDBS ProjectUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -52,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				970C80482D4845E600B1B7B1 /* PostgresClientKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,18 +83,10 @@
 				97AFCC122D350C0000C2DD9A /* GDBS Project */,
 				97AFCC232D350C0200C2DD9A /* GDBS ProjectTests */,
 				97AFCC2D2D350C0200C2DD9A /* GDBS ProjectUITests */,
-				97AFCC112D350C0000C2DD9A /* Products */,
+				970C80222D4845B800B1B7B1 /* GDBS Project.app */,
+				970C80232D4845B800B1B7B1 /* GDBS ProjectTests.xctest */,
+				970C80242D4845B800B1B7B1 /* GDBS ProjectUITests.xctest */,
 			);
-			sourceTree = "<group>";
-		};
-		97AFCC112D350C0000C2DD9A /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				97AFCC102D350C0000C2DD9A /* GDBS Project.app */,
-				97AFCC202D350C0200C2DD9A /* GDBS ProjectTests.xctest */,
-				97AFCC2A2D350C0200C2DD9A /* GDBS ProjectUITests.xctest */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -112,9 +109,10 @@
 			);
 			name = "GDBS Project";
 			packageProductDependencies = (
+				970C80472D4845E600B1B7B1 /* PostgresClientKit */,
 			);
 			productName = "GDBS Project";
-			productReference = 97AFCC102D350C0000C2DD9A /* GDBS Project.app */;
+			productReference = 970C80222D4845B800B1B7B1 /* GDBS Project.app */;
 			productType = "com.apple.product-type.application";
 		};
 		97AFCC1F2D350C0200C2DD9A /* GDBS ProjectTests */ = {
@@ -137,7 +135,7 @@
 			packageProductDependencies = (
 			);
 			productName = "GDBS ProjectTests";
-			productReference = 97AFCC202D350C0200C2DD9A /* GDBS ProjectTests.xctest */;
+			productReference = 970C80232D4845B800B1B7B1 /* GDBS ProjectTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		97AFCC292D350C0200C2DD9A /* GDBS ProjectUITests */ = {
@@ -160,7 +158,7 @@
 			packageProductDependencies = (
 			);
 			productName = "GDBS ProjectUITests";
-			productReference = 97AFCC2A2D350C0200C2DD9A /* GDBS ProjectUITests.xctest */;
+			productReference = 970C80242D4845B800B1B7B1 /* GDBS ProjectUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -195,8 +193,11 @@
 			);
 			mainGroup = 97AFCC072D350C0000C2DD9A;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				97B048342D4845460033A6CD /* XCRemoteSwiftPackageReference "PostgresClientKit" */,
+			);
 			preferredProjectObjectVersion = 77;
-			productRefGroup = 97AFCC112D350C0000C2DD9A /* Products */;
+			productRefGroup = 97AFCC072D350C0000C2DD9A;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -568,6 +569,24 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		97B048342D4845460033A6CD /* XCRemoteSwiftPackageReference "PostgresClientKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/codewinsdotcom/PostgresClientKit.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		970C80472D4845E600B1B7B1 /* PostgresClientKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PostgresClientKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 97AFCC082D350C0000C2DD9A /* Project object */;
 }

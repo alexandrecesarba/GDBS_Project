@@ -1,3 +1,11 @@
+//
+//  DatabaseManager.swift
+//  GDBS Project
+//
+//  Created by Alexandre César Brandão de Andrade on 27/01/25.
+//
+
+
 import PostgresClientKit
 
 class DatabaseManager {
